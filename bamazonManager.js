@@ -29,11 +29,11 @@ inquirer.prompt(questions).then(answers => {
             break;
 
         case "View Low Inventory":
-            console.log("PRIDUCTS FOR SALE")
+            viewLowInv();
             break;
 
         case "Add to Inventory":
-            console.log("PRIDUCTS FOR SALE")
+            addStock();
             break;
 
         case "Add New Product":
@@ -57,4 +57,46 @@ function viewItems() {
 
     });
     db.end();
+}
+
+function viewLowInv() {
+    db.query('SELECT * FROM products WHERE stock_quantity < 5;', function (error, results, fields) {
+        if (error)
+            throw error;
+
+        results.forEach((elem) => {
+            console.log("=====Begin Item====");
+            console.log(`Product Id: ${elem.item_id}\nProduct: ${elem.product_name}\nPrice: ${elem.price}\nStock Quantity: ${elem.stock_quantity}`);
+        });
+
+    });
+    db.end();
+}
+
+function addStock() {
+    let questions = [{
+        type: "input",
+        name: "itemId",
+        message: "Please enter a stock ID."
+    },
+    {
+        type: "input",
+        name: "quantity",
+        message: "Please enter a quanity to add ID."
+    }];
+
+    inquirer.prompt(questions).then(answers => {
+        db.query(`SELECT (stock_quantity) FROM products WHERE item_id=${answers.itemId}`, function (error, results) {
+            if (error)
+                throw error;
+
+            db.query(`UPDATE products SET stock_quantity=${parseFloat(answers.quantity) + parseFloat(results[0].stock_quantity)} WHERE item_id=${answers.itemId}`, function (error2, results2) {
+                if (error2)
+                    throw error2;
+            })
+       });
+    }).catch((err) => {
+        if (err)
+            throw err;
+    });
 }
