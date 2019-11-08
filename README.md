@@ -12,7 +12,7 @@ If there is enough stock to fulfill your order, then you will be presented with 
 If there is not enough stock to fulfill your order, then you will be presented with a message letting you know.
 ![bamazonCustomer.js purchase rejected](./readme_assets/customer-4.PNG)
 
-##bamazonManager.js
+## bamazonManager.js
 You will be presented with 4 options:
 ![bamazonManager.js menu](./readme_assets/manager-1.PNG)
 
