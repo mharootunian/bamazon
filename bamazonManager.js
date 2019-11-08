@@ -99,4 +99,5 @@ function addStock() {
         if (err)
             throw err;
     });
+
 }
