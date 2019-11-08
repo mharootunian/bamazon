@@ -61,8 +61,6 @@ function productHowManyUnits() {
                 throw error;
 
             if (results[0].stock_quantity > answers.quantity) {
-                console.log("Item(s) purchased!");
-                console.log(`priceL ${results[0]}`)
                 let newQ = results[0].stock_quantity - answers.quantity;
                 db.query(`UPDATE products SET stock_quantity=${newQ} WHERE item_id=${itemId}`);
                 console.log(`Thank you for your purchase! Your total was ${getTotal(results[0], answers.quantity)}`);
