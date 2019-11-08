@@ -21,8 +21,8 @@ db.query('SELECT * FROM products', function (error, results, fields) {
 
     results.forEach((elem) => {
         ids.push(elem.item_id);
-        console.log(`Product Id: ${elem.item_id}\nProduct: ${elem.product_name}\nPrice: ${elem.price}`);
         console.log("=====Begin Item====");
+        console.log(`Product Id: ${elem.item_id}\nProduct: ${elem.product_name}\nPrice: ${elem.price}`);
     });
 
     productWhich();
